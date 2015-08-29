@@ -15,13 +15,16 @@ $loader = (new \Nette\Loaders\RobotLoader())
 $loader->autoRebuild = $debug;
 $loader->register();
 
-// create and return container
-$class = (new \Nette\DI\ContainerLoader($cache, TRUE))->load('SystemContainer', function(\Nette\DI\Compiler $compiler) use ($debug) {
+// compile container
+$class = (new \Nette\DI\ContainerLoader($cache, $debug))->load('SystemContainer', function(\Nette\DI\Compiler $compiler) use ($debug) {
 	$compiler->getContainerBuilder()->parameters['debugMode'] = $debug;
+	$compiler->getContainerBuilder()->addExcludedClasses(['stdClass']);
 	$compiler->addExtension('extensions', new \Nette\DI\Extensions\ExtensionsExtension);
 	$compiler->loadConfig(__DIR__ . '/config.neon');
-	$compiler->getContainerBuilder()->addExcludedClasses(['stdClass']);
 });
+
+// create container
 $container = new $class;
 $container->initialize();
+
 return $container;
