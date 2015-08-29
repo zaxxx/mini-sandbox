@@ -1,0 +1,8 @@
+extensions:
+    tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%)
+
+tracy:
+    maxLen: 1000
+    maxDepth: 8
+    bar:
+        - Nette\Bridges\DITracy\ContainerPanel

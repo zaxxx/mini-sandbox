@@ -1,0 +1,8 @@
+{
+    "name": "zaxxx/mini-sandbox",
+    "require": {
+        "nette/di": "2.3.5",
+        "nette/robot-loader": "2.3.1",
+        "tracy/tracy": "2.3.4"
+    }
+}
